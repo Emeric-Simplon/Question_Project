@@ -23,7 +23,6 @@ export class QuestionCreateComponent implements OnInit {
     this.createForm();
     this.questionService.handleQuestionCreated().subscribe(data => {
       console.log('created receved', data);
-      this.refresh(data);
     });
   }
   createForm() {
@@ -38,21 +37,15 @@ export class QuestionCreateComponent implements OnInit {
     console.log(this.creationForm);
     this.questionService
     .createQuestion(this.creationForm.value)
-    .subscribe(data => this.handleSuccess(data, formDirective), error => this.handleError(error))};7
+    .subscribe(data => this.handleSuccess(data, formDirective), error => this.handleError(error))};
   } 
   handleSuccess(data, formDirective) {
-    this.questionService.dispatchQuestionCreated(data._id);
+    this.questionService.dispatchQuestionCreated(data);
     this.creationForm.reset();
     formDirective.resetForm();
     console.log("OK Question created", data);
   }
   handleError (error) {
     console.log("KO Question not created", error)
-  }
-  refresh(data) {
-    console.log('data', data);
-    this.questionService.getList().subscribe(data => {
-      this.allQuestions = data;
-    })
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Question } from './models/question';
 
 
@@ -10,17 +10,21 @@ import { Question } from './models/question';
 export class QuestionService {
   baseUrl = 'http://localhost:3000/api/v1/';
 
-  private questionCreated = new  Subject<string>();
+  private questionCreated = new  BehaviorSubject<any>({});
+
+  currentQuestion = this.questionCreated.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
   getList(): Observable<Question[]> {
-    return this.httpClient.get<Question[]>(`${this.baseUrl}/get-list`);
+    return this.httpClient.get<Question[]>(`${this.baseUrl}/get-list`)
+    
   }
 
-  dispatchQuestionCreated(id) {
-    this.questionCreated.next(id);
+  dispatchQuestionCreated(question) {
+    this.questionCreated.next(question);
   }
+
   handleQuestionCreated() {
     return this.questionCreated.asObservable();
   }

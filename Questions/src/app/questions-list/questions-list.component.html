@@ -1,4 +1,4 @@
-<mat-card *ngFor='let qs of question$ | async' class="example-card">
+<mat-card *ngFor='let qs of questions' class="example-card">
   <mat-card-header>
     <mat-card-title><a [routerLink]="['/questions', qs._id]">{{qs.question}}</a></mat-card-title>
     <mat-card-subtitle>{{qs.theme}}</mat-card-subtitle>

@@ -10,14 +10,19 @@ import { QuestionService } from '../question.service';
 })
 export class QuestionsListComponent implements OnInit {
 
-  question$: Observable<Question[]>;
+  questions:Question[];
 
   constructor( private questionService: QuestionService) { 
-
   }
 
   ngOnInit() {
-    this.question$ = this.questionService.getList();
-    
+    this.questionService.getList().subscribe((questions)=> {
+      this.questions = questions;
+      this.questionService.currentQuestion.subscribe((question) => {
+        console.log(question);
+        this.questions.unshift(question);
+      });
+    })
+
   }
 }
