@@ -1,0 +1,23 @@
+<mat-card>
+  <form [formGroup]="creationForm" #formDirective="ngForm" (submit)="createQuestion(formDirective)">
+    <div class="exemple-container">
+      <mat-form-field>
+        <input matInput placeholder="Question" required formControlName="question">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Auteur" required formControlName="auteur">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select  placeholder="THEME" required formControlName="theme">
+          <mat-option value="html">HTML</mat-option>
+          <mat-option value="css">CSS</mat-option>
+          <mat-option value="javascript">JavaScript</mat-option>
+          <mat-option value="react">React.Js</mat-option>
+          <mat-option value="node">Node.Js</mat-option>
+          <mat-option value="angular">Angular.Js</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button type='submit'>Soumettre</button>
+    </div>
+  </form>
+</mat-card>

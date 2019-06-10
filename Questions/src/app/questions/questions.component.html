@@ -1,0 +1,14 @@
+<mat-expansion-panel *ngIf="(question$ | async) as qs; else loading">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{qs.question}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <p>{{qs.auteur}} - {{qs.createOn | date:'MM/dd/yyyy H:MM'}} - {{qs.theme}}</p>
+  <mat-card-actions><button mat-button (click)="deleteQuestion(qs._id)">Supprimer</button></mat-card-actions>
+</mat-expansion-panel>
+
+<ng-template #loading>
+  Loading...
+</ng-template>
+
